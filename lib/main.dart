@@ -9,6 +9,11 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
+
+
+
+
+
 }
 
 class MyApp extends StatelessWidget {
@@ -17,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
+      title: 'Scribe - firebase',
       theme: CupertinoThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.deepPurple,
