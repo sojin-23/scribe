@@ -14,6 +14,9 @@ class NewNotePage extends StatefulWidget {
 }
 
 class _NewNotePageState extends State<NewNotePage> {
+  final titleController = TextEditingController();
+  final contentController = TextEditingController();
+
   final audioPlayer = AudioPlayer();
   @override
   Widget build(BuildContext context) {
@@ -74,12 +77,14 @@ class _NewNotePageState extends State<NewNotePage> {
                 color: Colors.grey,
               ),
               CupertinoTextField(
+                controller: titleController,
                 placeholder: 'Title',
                 style: TextStyle(fontSize: 40),
                 decoration:
                     BoxDecoration(border: Border.all(color: Colors.black)),
               ),
               CupertinoTextField(
+                controller: contentController,
                 placeholder: 'Content',
                 style: TextStyle(
                   fontSize: 20,

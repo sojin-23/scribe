@@ -17,6 +17,10 @@ class NewAccount extends StatefulWidget {
 }
 
 class _NewAccountState extends State<NewAccount> {
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -46,18 +50,23 @@ class _NewAccountState extends State<NewAccount> {
               SizedBox(
                 height: 30,
               ),
-              MyTextFields(placeHolder: 'Enter your name'),
+              MyTextFields(
+                placeHolder: 'Enter your name',
+                textEditingController: nameController,
+              ),
               SizedBox(
                 height: 10,
               ),
               MyTextFields(
                 placeHolder: 'Enter your email',
+                textEditingController: emailController,
                 keyboardType: TextInputType.emailAddress,
               ),
               SizedBox(
                 height: 10,
               ),
               MyTextFields(
+                textEditingController: passwordController,
                 placeHolder: 'Enter your password',
                 suffix: Padding(
                   padding: const EdgeInsets.only(right: 20),

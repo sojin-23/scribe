@@ -6,11 +6,13 @@ class MyTextFields extends StatelessWidget {
   final String placeHolder;
   final TextInputType? keyboardType;
   final Widget? suffix;
-  const MyTextFields({super.key, required this.placeHolder, this.keyboardType, this.suffix});
+  final TextEditingController textEditingController;
+  const MyTextFields({super.key, required this.placeHolder, this.keyboardType, this.suffix, required this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTextField(
+      controller: textEditingController,
       suffix: suffix,
       keyboardType: keyboardType,
       padding: EdgeInsets.only(top: 20, bottom: 20, left: 15),

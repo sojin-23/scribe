@@ -17,6 +17,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -49,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 30,
                 ),
                 MyTextFields(
+                  textEditingController: emailController,
                   placeHolder: 'Enter your email',
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -56,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 10,
                 ),
                 MyTextFields(
+                  textEditingController: passwordController,
                   placeHolder: 'Enter your password',
                   suffix: Padding(
                     padding: const EdgeInsets.only(right: 20),
