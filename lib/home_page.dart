@@ -5,6 +5,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ios_note_app/edit_note_page.dart';
 import 'package:ios_note_app/new_note_page.dart';
 import 'package:ios_note_app/splash_page.dart';
 
@@ -157,7 +158,10 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(
                     left: 20, right: 20, bottom: 0, top: 15),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (context) => EditNotePage()));
+                  },
                   onLongPress: () {
                     showCupertinoDialog(
                       context: context,
@@ -213,10 +217,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Padding(
                       padding:
-                          const EdgeInsets.only(left: 15, top: 10, bottom: 10),
+                          const EdgeInsets.only(left: 15, top: 5, bottom: 5),
                       child: Text(
                         "Note Title",
-                        style: TextStyle(fontSize: 25),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
