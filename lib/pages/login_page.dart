@@ -5,9 +5,9 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ios_note_app/home_page.dart';
-import 'package:ios_note_app/my_buttons.dart';
-import 'package:ios_note_app/my_textfileds.dart';
+import 'package:ios_note_app/pages/home_page.dart';
+import 'package:ios_note_app/utils/my_buttons.dart';
+import 'package:ios_note_app/utils/my_textfileds.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

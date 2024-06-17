@@ -2,9 +2,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ios_note_app/login_page.dart';
-import 'package:ios_note_app/my_buttons.dart';
-import 'package:ios_note_app/new_account_page.dart';
+import 'package:ios_note_app/pages/login_page.dart';
+import 'package:ios_note_app/utils/my_buttons.dart';
+import 'package:ios_note_app/pages/new_account_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

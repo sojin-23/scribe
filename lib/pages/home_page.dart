@@ -5,9 +5,9 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ios_note_app/edit_note_page.dart';
-import 'package:ios_note_app/new_note_page.dart';
-import 'package:ios_note_app/splash_page.dart';
+import 'package:ios_note_app/pages/edit_note_page.dart';
+import 'package:ios_note_app/pages/new_note_page.dart';
+import 'package:ios_note_app/pages/splash_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
