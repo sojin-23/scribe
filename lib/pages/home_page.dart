@@ -2,11 +2,9 @@
 
 import 'dart:async';
 import 'dart:ui';
-import 'package:flutter/services.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ios_note_app/pages/edit_note_page.dart';
 import 'package:ios_note_app/pages/new_note_page.dart';
 import 'package:ios_note_app/pages/splash_page.dart';
 
@@ -152,85 +150,35 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           Expanded(
-              child: ListView.builder(
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(
-                    left: 20, right: 20, bottom: 0, top: 15),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(CupertinoPageRoute(
-                        builder: (context) => EditNotePage()));
-                  },
-                  onLongPress: () {
-                    HapticFeedback.vibrate();
-                    showCupertinoDialog(
-                      context: context,
-                      builder: (context) => CupertinoAlertDialog(
-                        title: Text('Are you sure?'),
-                        content: Text('Deleted note cannot be recovered'),
-                        actions: [
-                          CupertinoActionSheetAction(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              "Cancel",
-                              style: TextStyle(color: Colors.white),
-                            ),
+            child: GridView.builder(
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemCount: 10,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.all(10),
+                child: Container(
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color.fromARGB(255, 35, 34, 34),
+                        border: Border.all(color: Colors.grey)),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Title note',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
-                          CupertinoActionSheetAction(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              showCupertinoModalPopup(
-                                context: context,
-                                builder: (context) {
-                                  return StatefulBuilder(
-                                    builder: (context, setState) {
-                                      Timer(Duration(seconds: 2), () {
-                                        Navigator.pop(context);
-                                      });
-
-                                      return CupertinoPopupSurface(
-                                        child: Container(
-                                          padding: EdgeInsets.all(20),
-                                          width: double.infinity,
-                                          child: Text('Note Deleted'),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                            isDestructiveAction: true,
-                            child: Text('Confirm'),
-                          )
+                          Divider(color: Colors.grey,),
+                          Text(
+                              "Here is a paragraph describing the different types of precipitation besides rain:In addition to the familiar form of liquid precipitation known as rain, there are several other types of precipitation that can occur in the Earth's atmosphere. One common type is snow, which forms when water vapor condenses directly into ice crystals that fall to the ground. Sleet is another precipitation type, consisting of small, translucent ice pellets that result when raindrops pass through a layer of cold air near the surface and freeze. Hail is a more dramatic form of solid precipitation, comprising balls or irregular lumps of ice that grow in size as they are repeatedly lifted up and down in the turbulent updrafts of thunderstorms. Finally, freezing rain occurs when liquid raindrops fall through a sub-freezing layer of air near the ground, causing them to freeze on contact with surfaces and creating a dangerous coating of ice. Though less familiar than the ubiquitous rain, these other forms of precipitation play important roles in Earth's weather and climate patterns, with each type forming under distinct atmospheric conditions.")
                         ],
                       ),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.only(top: 25, bottom: 25),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 35, 34, 34),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 15, top: 5, bottom: 5),
-                      child: Text(
-                        "Note Title",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
-          )),
+                    )),
+              ),
+            ),
+          ),
         ],
       ),
     );
