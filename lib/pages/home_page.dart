@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:ui';
+import 'package:flutter/services.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -152,83 +153,84 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
               child: ListView.builder(
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(
-                    left: 20, right: 20, bottom: 0, top: 15),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(CupertinoPageRoute(
-                        builder: (context) => EditNotePage()));
-                  },
-                  onLongPress: () {
-                    showCupertinoDialog(
-                      context: context,
-                      builder: (context) => CupertinoAlertDialog(
-                        title: Text('Are you sure?'),
-                        content: Text('Deleted note cannot be recovered'),
-                        actions: [
-                          CupertinoActionSheetAction(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              "Cancel",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          CupertinoActionSheetAction(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              showCupertinoModalPopup(
-                                context: context,
-                                builder: (context) {
-                                  return StatefulBuilder(
-                                    builder: (context, setState) {
-                                      Timer(Duration(seconds: 2), () {
-                                        Navigator.pop(context);
-                                      });
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20, right: 20, bottom: 0, top: 15),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(CupertinoPageRoute(
+                            builder: (context) => EditNotePage()));
+                      },
+                      onLongPress: () {
+                        HapticFeedback.vibrate();
+                        showCupertinoDialog(
+                          context: context,
+                          builder: (context) => CupertinoAlertDialog(
+                            title: Text('Are you sure?'),
+                            content: Text('Deleted note cannot be recovered'),
+                            actions: [
+                              CupertinoActionSheetAction(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              CupertinoActionSheetAction(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  showCupertinoModalPopup(
+                                    context: context,
+                                    builder: (context) {
+                                      return StatefulBuilder(
+                                        builder: (context, setState) {
+                                          Timer(Duration(seconds: 2), () {
+                                            Navigator.pop(context);
+                                          });
 
-                                      return CupertinoPopupSurface(
-                                        child: Container(
-                                          padding: EdgeInsets.all(20),
-                                          width: double.infinity,
-                                          child: Text('Note Deleted'),
-                                        ),
+                                          return CupertinoPopupSurface(
+                                            child: Container(
+                                              padding: EdgeInsets.all(20),
+                                              width: double.infinity,
+                                              child: Text('Note Deleted'),
+                                            ),
+                                          );
+                                        },
                                       );
                                     },
                                   );
                                 },
-                              );
-                            },
-                            isDestructiveAction: true,
-                            child: Text('Confirm'),
-                          )
-                        ],
+                                isDestructiveAction: true,
+                                child: Text('Confirm'),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(top: 25, bottom: 25),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 35, 34, 34),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 15, top: 5, bottom: 5),
+                          child: Text(
+                            "Note Title",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.only(top: 25, bottom: 25),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 35, 34, 34),
-                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 15, top: 5, bottom: 5),
-                      child: Text(
-                        "Note Title",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
-          )),
+                  );
+                },
+              )),
         ],
       ),
     );
