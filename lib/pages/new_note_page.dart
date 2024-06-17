@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class NewNotePage extends StatefulWidget {
 }
 
 class _NewNotePageState extends State<NewNotePage> {
+  final audioPlayer = AudioPlayer();
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -37,6 +39,7 @@ class _NewNotePageState extends State<NewNotePage> {
                   Text('New Note'),
                   GestureDetector(
                     onTap: () {
+                      playAudio();
                       Navigator.pop(context);
                       showCupertinoModalPopup(
                         context: context,
@@ -89,5 +92,10 @@ class _NewNotePageState extends State<NewNotePage> {
         ),
       ),
     ));
+  }
+
+  Future<void> playAudio() async {
+    String audioPath = "audio/note_created.mp3";
+    await audioPlayer.play(AssetSource(audioPath));
   }
 }
