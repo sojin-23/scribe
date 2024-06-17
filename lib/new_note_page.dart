@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -36,6 +38,26 @@ class _NewNotePageState extends State<NewNotePage> {
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
+                      showCupertinoModalPopup(
+                        context: context,
+                        builder: (context) {
+                          return StatefulBuilder(
+                            builder: (context, setState) {
+                              Timer(Duration(seconds: 2), () {
+                                Navigator.pop(context);
+                              });
+
+                              return CupertinoPopupSurface(
+                                child: Container(
+                                  padding: EdgeInsets.all(20),
+                                  width: double.infinity,
+                                  child: Text('Note created'),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
                     },
                     child: Icon(
                       CupertinoIcons.check_mark,
@@ -47,6 +69,20 @@ class _NewNotePageState extends State<NewNotePage> {
               Divider(
                 height: 30,
                 color: Colors.grey,
+              ),
+              CupertinoTextField(
+                placeholder: 'Title',
+                style: TextStyle(fontSize: 40),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.black)),
+              ),
+              CupertinoTextField(
+                placeholder: 'Content',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.black)),
               )
             ],
           ),

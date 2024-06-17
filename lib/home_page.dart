@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:async';
 import 'dart:ui';
@@ -22,8 +22,11 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.black,
       navigationBar: CupertinoNavigationBar(
         leading: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Text('scribe', style: TextStyle(color: Colors.white)),
+          padding: const EdgeInsets.all(5),
+          child: Text(
+            'scribe',
+            style: TextStyle(color: Colors.white, fontSize: 25),
+          ),
         ),
         trailing: GestureDetector(
           onTap: () {
@@ -53,13 +56,17 @@ class _HomePageState extends State<HomePage> {
                         context: context,
                         builder: (context) => CupertinoAlertDialog(
                           title: Text('About Us'),
-                          content: Text('This is a sample about us dialog.'),
+                          content: Text(
+                              "I'm Sojin, and I'm a Flutter developer. I build efficient mobile apps for both iOS and Android."),
                           actions: [
                             CupertinoDialogAction(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text('Close'),
+                              child: Text(
+                                'Close',
+                                style: TextStyle(color: Colors.red),
+                              ),
                             ),
                           ],
                         ),
@@ -131,11 +138,11 @@ class _HomePageState extends State<HomePage> {
             );
           },
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(bottom: 5, right: 10),
             child: Icon(
               CupertinoIcons.add,
               color: Colors.white,
-              size: 20,
+              size: 30,
             ),
           ),
         ),
@@ -143,24 +150,80 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           Expanded(
-            child: GridView.builder(
-              itemCount: 10,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(10),
+              child: ListView.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(
+                    left: 20, right: 20, bottom: 0, top: 15),
+                child: GestureDetector(
+                  onTap: () {},
+                  onLongPress: () {
+                    showCupertinoDialog(
+                      context: context,
+                      builder: (context) => CupertinoAlertDialog(
+                        title: Text('Are you sure?'),
+                        content: Text('Deleted note cannot be recovered'),
+                        actions: [
+                          CupertinoActionSheetAction(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          CupertinoActionSheetAction(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              showCupertinoModalPopup(
+                                context: context,
+                                builder: (context) {
+                                  return StatefulBuilder(
+                                    builder: (context, setState) {
+                                      Timer(Duration(seconds: 2), () {
+                                        Navigator.pop(context);
+                                      });
+
+                                      return CupertinoPopupSurface(
+                                        child: Container(
+                                          padding: EdgeInsets.all(20),
+                                          width: double.infinity,
+                                          child: Text('Note Deleted'),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                            isDestructiveAction: true,
+                            child: Text('Confirm'),
+                          )
+                        ],
+                      ),
+                    );
+                  },
                   child: Container(
+                    padding: EdgeInsets.only(top: 25, bottom: 25),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: const Color.fromARGB(255, 35, 34, 34),
                       borderRadius: BorderRadius.circular(10),
                     ),
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 15, top: 10, bottom: 10),
+                      child: Text(
+                        "Note Title",
+                        style: TextStyle(fontSize: 25),
+                      ),
+                    ),
                   ),
-                );
-              },
-            ),
-          ),
+                ),
+              );
+            },
+          )),
         ],
       ),
     );
