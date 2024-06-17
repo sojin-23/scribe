@@ -57,6 +57,7 @@ class _SplashPageState extends State<SplashPage> {
                       height: 10,
                     ),
                     MyButtons(
+                      color: const Color.fromARGB(255, 35, 34, 34),
                       buttonName: 'Sign up',
                       borderColor: Border.all(color: Colors.grey),
                       onPressed: () {
