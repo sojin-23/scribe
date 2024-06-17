@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             CupertinoDialogAction(
                               onPressed: () {
-                                Navigator.pop(context); // Dismiss the dialog
+                                // Navigator.pop(context); // Dismiss the dialog
                                 showCupertinoDialog(
                                   context: context,
                                   builder: (context) => Center(
