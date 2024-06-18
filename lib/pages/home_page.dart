@@ -5,8 +5,10 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ios_note_app/pages/edit_note_page.dart';
 import 'package:ios_note_app/pages/new_note_page.dart';
 import 'package:ios_note_app/pages/splash_page.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,12 +32,15 @@ class _HomePageState extends State<HomePage> {
         ),
         trailing: GestureDetector(
           onTap: () {
+            HapticFeedback.mediumImpact();
             showCupertinoModalPopup(
               context: context,
               builder: (context) => CupertinoActionSheet(
                 actions: [
                   CupertinoActionSheetAction(
                     onPressed: () {
+                    HapticFeedback.mediumImpact();
+
                       Navigator.pop(context); // Dismiss the action sheet
                       Navigator.of(context).push(
                         CupertinoPageRoute(
@@ -50,6 +55,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   CupertinoActionSheetAction(
                     onPressed: () {
+                    HapticFeedback.mediumImpact();
+
                       Navigator.pop(context); // Dismiss the action sheet
                       // Implement the about us page navigation or dialog
                       showCupertinoDialog(
@@ -61,6 +68,8 @@ class _HomePageState extends State<HomePage> {
                           actions: [
                             CupertinoDialogAction(
                               onPressed: () {
+                    HapticFeedback.mediumImpact();
+
                                 Navigator.pop(context);
                               },
                               child: Text(
@@ -79,6 +88,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   CupertinoActionSheetAction(
                     onPressed: () {
+                    HapticFeedback.mediumImpact();
+
                       Navigator.pop(context); // Dismiss the action sheet
                       showCupertinoDialog(
                         context: context,
@@ -88,6 +99,8 @@ class _HomePageState extends State<HomePage> {
                           actions: [
                             CupertinoDialogAction(
                               onPressed: () {
+                    HapticFeedback.mediumImpact();
+
                                 Navigator.pop(context); // Dismiss the dialog
                               },
                               child: Text(
@@ -97,7 +110,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                             CupertinoDialogAction(
                               onPressed: () {
-                                // Navigator.pop(context); // Dismiss the dialog
+                    HapticFeedback.mediumImpact();
+
                                 showCupertinoDialog(
                                   context: context,
                                   builder: (context) => Center(
@@ -156,26 +170,65 @@ class _HomePageState extends State<HomePage> {
               itemCount: 10,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.all(10),
-                child: Container(
-                    padding: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: const Color.fromARGB(255, 35, 34, 34),
-                        border: Border.all(color: Colors.grey)),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Text(
-                            'Title note',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          Divider(color: Colors.grey,),
-                          Text(
-                              "Here is a paragraph describing the different types of precipitation besides rain:In addition to the familiar form of liquid precipitation known as rain, there are several other types of precipitation that can occur in the Earth's atmosphere. One common type is snow, which forms when water vapor condenses directly into ice crystals that fall to the ground. Sleet is another precipitation type, consisting of small, translucent ice pellets that result when raindrops pass through a layer of cold air near the surface and freeze. Hail is a more dramatic form of solid precipitation, comprising balls or irregular lumps of ice that grow in size as they are repeatedly lifted up and down in the turbulent updrafts of thunderstorms. Finally, freezing rain occurs when liquid raindrops fall through a sub-freezing layer of air near the ground, causing them to freeze on contact with surfaces and creating a dangerous coating of ice. Though less familiar than the ubiquitous rain, these other forms of precipitation play important roles in Earth's weather and climate patterns, with each type forming under distinct atmospheric conditions.")
-                        ],
+                child: GestureDetector(
+                  onTap: () {
+                    HapticFeedback.mediumImpact();
+                    Navigator.of(context).push(
+                      CupertinoPageRoute(
+                        builder: (context) => EditNotePage(),
                       ),
-                    )),
+                    );
+                  },
+                  onLongPress: () {
+                    HapticFeedback.vibrate();
+                    showCupertinoDialog(
+                        context: context,
+                        builder: (context) => CupertinoAlertDialog(
+                              title: Text('Warning'),
+                              content: Text("Deleted note can't be recovered"),
+                              actions: [
+                                CupertinoActionSheetAction(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    'Cancel',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                CupertinoActionSheetAction(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  isDestructiveAction: true,
+                                  child: Text('Delete'),
+                                ),
+                              ],
+                            ));
+                  },
+                  child: Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color.fromARGB(255, 35, 34, 34),
+                          border: Border.all(color: Colors.grey)),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Text(
+                              'Title note',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                            ),
+                            Text(
+                                "Here is a paragraph describing the different types of precipitation besides rain:In addition to the familiar form of liquid precipitation known as rain, there are several other types of precipitation that can occur in the Earth's atmosphere. One common type is snow, which forms when water vapor condenses directly into ice crystals that fall to the ground. Sleet is another precipitation type, consisting of small, translucent ice pellets that result when raindrops pass through a layer of cold air near the surface and freeze. Hail is a more dramatic form of solid precipitation, comprising balls or irregular lumps of ice that grow in size as they are repeatedly lifted up and down in the turbulent updrafts of thunderstorms. Finally, freezing rain occurs when liquid raindrops fall through a sub-freezing layer of air near the ground, causing them to freeze on contact with surfaces and creating a dangerous coating of ice. Though less familiar than the ubiquitous rain, these other forms of precipitation play important roles in Earth's weather and climate patterns, with each type forming under distinct atmospheric conditions.")
+                          ],
+                        ),
+                      )),
+                ),
               ),
             ),
           ),

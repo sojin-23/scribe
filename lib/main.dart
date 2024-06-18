@@ -5,15 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ios_note_app/pages/splash_page.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
-
-
-
-
-
 }
 
 class MyApp extends StatelessWidget {
@@ -33,5 +28,5 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SplashPage(),
     );
-  } 
+  }
 }
